@@ -1,15 +1,18 @@
 (function () {
 
+    const DEFAULT_ALLOWED_CHARS = "àçèéêëôïîùûüÀÇÈÉÊËÎÏÔÙÛÜ€$©";
+
     // Exit immediately if the extension has been turned off by the user
-    chrome.storage.sync.get({ enabled: true }, ({ enabled }) => {
-        if (enabled) init();
+    chrome.storage.sync.get({ enabled: true, allowedChars: DEFAULT_ALLOWED_CHARS }, ({ enabled, allowedChars }) => {
+        if (enabled) init(allowedChars);
     });
 
-    function init() {
+    function init(allowedChars) {
 
     // ── Constants ────────────────────────────────────────────────────────
 
-    const ALLOWED_CHARS = "àçèéêëôïîùûüÀÇÈÉÊËÎÏÔÙÛÜ€$©";
+    // Escape regex metacharacters so arbitrary user-supplied chars stay literal inside [...]
+    const ALLOWED_CHARS = allowedChars.replace(/[\\\]^-]/g, "\\$&");
 
     // No `g` flag — stateless, safe to reuse. Use makeGlobalRe() where needed.
     const RE = new RegExp(`[^\x00-\x7F${ALLOWED_CHARS}]`);
