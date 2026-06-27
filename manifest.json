@@ -4,12 +4,14 @@
   "version": "1.0",
   "description": "Detects non-ASCII characters on webpages that may indicate AI-generated text.",
   "permissions": [
-    "activeTab",
     "storage"
   ],
   "action": {
     "default_popup": "popup.html",
     "default_title": "Non-ASCII Detector"
+  },
+  "icons": {
+    "128": "icons/icon128.png"
   },
   "content_scripts": [
     {
