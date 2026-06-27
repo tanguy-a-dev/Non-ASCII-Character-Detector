@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 220px;
+            padding: 16px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            font-size: 13px;
+            color: #111;
+            background: #fff;
+        }
+
+        .title {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 14px;
+        }
+
+        .title::before {
+            content: "⚠";
+            margin-right: 6px;
+            color: #f0a500;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .status {
+            color: #333;
+        }
+
+        .status em {
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        #toggleBtn {
+            flex-shrink: 0;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        #toggleBtn.is-on {
+            background: #fff3cd;
+            border-color: #f0a500;
+            color: #7a5200;
+        }
+
+        #toggleBtn.is-on:hover {
+            background: #ffe9a0;
+        }
+
+        #toggleBtn.is-off {
+            background: rgba(0,0,0,0.04);
+            border-color: rgba(0,0,0,0.08);
+            color: #333;
+        }
+
+        #toggleBtn.is-off:hover {
+            background: rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body>
+    <p class="title">non-ascii detector</p>
+    <div class="row">
+        <span class="status">Status: <em id="statusLabel"></em></span>
+        <button id="toggleBtn"></button>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

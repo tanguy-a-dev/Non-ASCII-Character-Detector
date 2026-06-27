@@ -1,0 +1,227 @@
+.non-ascii-box {
+    position: fixed;
+    top: 80px;
+    right: 16px;
+    z-index: 999999;
+    width: 260px;
+
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 14px 16px;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    color: #111;
+    line-height: 1.4;
+
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.04),
+        0 12px 28px rgba(0, 0, 0, 0.10);
+
+    animation: asciiSlideIn 0.2s ease-out both;
+}
+
+@keyframes asciiSlideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ── Header ── */
+
+.non-ascii-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.non-ascii-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #555;
+}
+
+.non-ascii-title::before {
+    content: "⚠";
+    margin-right: 6px;
+    color: #f0a500;
+}
+
+.non-ascii-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: #999;
+    padding: 0 2px;
+    line-height: 1;
+    transition: color 0.15s;
+}
+
+.non-ascii-close:hover {
+    color: #333;
+}
+
+
+/* ── Counts ── */
+
+.non-ascii-counts {
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.non-ascii-sep {
+    margin: 0 5px;
+    color: #bbb;
+}
+
+
+/* ── Action buttons ── */
+
+.non-ascii-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.non-ascii-button {
+    flex: 1;
+    padding: 7px 12px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+    transition: background 0.15s;
+    text-align: center;
+}
+
+.non-ascii-button:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.non-ascii-button:active {
+    transform: scale(0.98);
+}
+
+.non-ascii-button.is-active {
+    background: #fff3cd;
+    border-color: #f0a500;
+    color: #7a5200;
+}
+
+.non-ascii-button.is-active:hover {
+    background: #ffe9a0;
+}
+
+
+/* ── Character list ── */
+
+.non-ascii-list {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    max-height: 140px;
+    overflow-y: auto;
+    word-break: break-all;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.non-ascii-list.is-open {
+    display: block;
+    animation: asciiExpand 0.18s ease-out both;
+}
+
+@keyframes asciiExpand {
+    from { opacity: 0; transform: scaleY(0.96); transform-origin: top; }
+    to   { opacity: 1; transform: scaleY(1);    transform-origin: top; }
+}
+
+.non-ascii-char {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    padding: 3px 6px;
+    margin: 2px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    font-size: 13px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    cursor: default;
+}
+
+.non-ascii-char:hover {
+    background: #f5f5f5;
+}
+
+
+/* ── Highlight marks injected into page ── */
+
+mark.non-ascii-highlight {
+    background: #fff176;
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 1px;
+    outline: 1.5px solid #f0a500;
+}
+
+
+/* ── Focused mark (navigation target) ── */
+
+mark.non-ascii-highlight.is-focused {
+    background: #ff9800;
+    outline-color: #e65100;
+    outline-width: 2px;
+}
+
+
+/* ── Per-character navigation counter on badge ── */
+
+.non-ascii-char {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.non-ascii-char:hover {
+    background: #e8e8e8;
+    transform: scale(1.08);
+}
+
+.non-ascii-char.has-nav::after {
+    content: attr(data-nav);
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    background: #f0a500;
+    color: #fff;
+    font-size: 9px;
+    font-family: system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1;
+    padding: 2px 4px;
+    border-radius: 10px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+.non-ascii-char.nav-fading::after {
+    opacity: 0;
+}
